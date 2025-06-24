@@ -1,5 +1,10 @@
-/* Основные стили страницы */
+/* глобальная установка плавного скролла */
+html {
+  scroll-behavior: smooth;
+}
+
 .page-main {
+  background: #f6f7fa;
   padding: 35px 0;
 }
 
@@ -18,7 +23,6 @@
   font-weight: 700;
 }
 
-/* Сетка страницы */
 .page-grid {
   display: flex;
   flex-direction: column;
@@ -36,15 +40,16 @@
   padding: 25px;
   border-radius: 15px;
   background: #fff;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
 .page-grid__aside {
   flex-shrink: 0;
   background: #fff;
   border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
-/* Адаптация для десктопов */
 @media (min-width: 1201px) {
   .page-main {
     padding: 70px 0;
@@ -73,7 +78,6 @@
   }
 }
 
-/* Скрытие на мобильных */
 @media (max-width: 992px) {
   .hidden-mob {
     display: none;

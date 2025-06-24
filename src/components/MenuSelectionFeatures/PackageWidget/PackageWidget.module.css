@@ -1,0 +1,66 @@
+/* src/components/MenuSelectionFeatures/PackageWidget/PackageWidget.module.css */
+
+/* Корневой контейнер одного виджета-пакета */
+.packageWidget {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+  border-bottom: 1px solid #e0e0e0;
+  margin-bottom: 20px;
+}
+.packageWidget:last-child {
+  border-bottom: none;
+}
+
+/* Шапка: «Pakiet #», крестик “remove” */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.header h3 {
+  font-size: 20px;
+  font-weight: 600;
+}
+.removeButton {
+  background: none;
+  border: none;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  color: #e00;
+}
+
+/* Строка с кнопкой “Wybierz datę” */
+.dateRow {
+  margin: 15px 0;
+}
+.dateButton {
+  padding: 12px 20px;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  background: #0056d3;
+  border: 1px solid #0056d3;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.dateButton:hover {
+  color: #000;
+  background: rgba(0, 0, 0, 0);
+}
+
+/* Контейнер секций (три секции после выбора даты) */
+.categoriesContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* Если нужно скрыть блок при отсутствии даты */
+.hidden {
+  display: none;
+}

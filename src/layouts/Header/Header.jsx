@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import styles from "./Header.module.css";
 import Logo from "./Logo/Logo";
 import DesktopMenu from "./components/DesktopMenu/DesktopMenu";
@@ -9,40 +8,29 @@ import BurgerButton from "./components/BurgerButton/BurgerButton";
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen((prevState) => !prevState);
-  };
-
-  const closeMobileMenu = () => {
-    setIsMobileMenuOpen(false);
-  };
+  const toggleMobileMenu = () => setIsMobileMenuOpen((v) => !v);
+  const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
   return (
     <header className={styles.header} role="banner">
       <div className={styles.headerContainer}>
-        <Logo className={styles.logo} />
+        <Logo />
 
-        <DesktopMenu className={styles.desktopMenu} />
+        {/* Десктоп-меню (показать ≥768px) */}
+        <nav className={styles.desktopMenu}>
+          <DesktopMenu />
+        </nav>
 
-        <BurgerButton
-          isOpen={isMobileMenuOpen}
-          onClick={toggleMobileMenu}
-          className={styles.burgerButton}
-          aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
-        />
+        {/* Бургер-кнопка (показать <768px) */}
+        <div className={styles.burgerWrapper}>
+          <BurgerButton isOpen={isMobileMenuOpen} onClick={toggleMobileMenu} />
+        </div>
 
-        <MobileMenu
-          isOpen={isMobileMenuOpen}
-          onClose={closeMobileMenu}
-          className={styles.mobileMenu}
-        />
+        {/* Мобильное меню (рендерит null, если isOpen=false) */}
+        <MobileMenu isOpen={isMobileMenuOpen} onClose={closeMobileMenu} />
       </div>
     </header>
   );
-};
-
-Header.propTypes = {
-  // Добавьте propTypes если компонент принимает пропсы
 };
 
 export default Header;

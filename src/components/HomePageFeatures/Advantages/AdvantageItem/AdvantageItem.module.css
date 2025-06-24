@@ -18,9 +18,8 @@
   justify-content: center;
   width: 35px;
   height: 35px;
-  padding: 7px;
+
   border-radius: 50%;
-  background: linear-gradient(90deg, #0056d3 0, #2e7beb 100%);
 }
 
 .advants__icon img,
@@ -36,7 +35,7 @@
   }
 
   .advants__icon {
-    width: 60px;
-    height: 60px;
+    width: 70px;
+    height: 70px;
   }
 }

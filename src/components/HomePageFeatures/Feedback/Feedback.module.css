@@ -1,155 +1,211 @@
+.feedbackSection {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  background-color: #fff;
+  margin-bottom: 25px;
+}
+
 .feedback {
-    position: relative;
-    padding: 35px 0;
-    background: #fff;
-    border-radius: 15px 15px 0 0;
+  position: relative;
+  padding: 35px 0;
+  background: #fff;
+  border-radius: 15px 15px 0 0;
 }
 
 .feedback.show-modal .calc-modal {
-    opacity: 1 !important;
-    visibility: visible !important;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
-.feedback img {
-    display: none;
+.feedbackSection img {
+  display: none;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 20px;
+  border-radius: 50px;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 20px;
+  color: #fff;
+  background: #0056d3;
+  border: 1px solid #0056d3;
+  transition: 0.5s;
 }
 
 .feedback__title {
-    text-align: center;
-    margin-bottom: 25px;
+  font-weight: 700;
+  font-size: 30px;
+  text-align: center;
+  margin-bottom: 25px;
+  margin-top: 30px;
 }
 
 .feedback__form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 100%;
-    flex-shrink: 0;
-    margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  flex-shrink: 0;
+  margin: 0 auto;
 }
 
 .feedback__field {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .feedback__field-error {
-    display: none;
-    color: red;
-    margin-top: 5px;
+  display: none;
+  color: red;
+  margin-top: 5px;
 }
 
 .feedback__field.has-error:not(.has-error-charters) input,
 .feedback__field.has-error:not(.has-error-charters) textarea {
-    border: 1px solid red;
+  border: 1px solid red;
 }
 
 .feedback__field.has-error:not(.has-error-charters) .has-error {
-    display: block;
+  display: block;
 }
 
 .feedback__field.has-error.has-error-charters input,
 .feedback__field.has-error.has-error-charters textarea {
-    border: 1px solid red;
+  border: 1px solid red;
 }
 
 .feedback__field.has-error.has-error-charters .has-error-charters {
-    display: block;
+  display: block;
 }
 
 .feedback__label {
-    font-weight: 600;
-    font-size: 14px;
+  font-weight: 600;
+  font-size: 14px;
 }
 
 .feedback__input {
-    padding: 0 20px;
-    border: 0;
-    width: 100%;
-    height: 50px;
-    border-radius: 5px;
-    box-shadow: none;
-    background: #f6f7fa;
-    outline: 0;
+  padding: 0 20px;
+  border: 0;
+  width: 100%;
+  height: 50px;
+  border-radius: 15px;
+  box-shadow: none;
+  background: #f6f7fa;
+  outline: 0;
 }
 
 .feedback__textarea {
-    padding: 20px;
-    border: 0;
-    width: 100%;
-    resize: none;
-    height: 110px;
-    border-radius: 5px;
-    box-shadow: none;
-    background: #f6f7fa;
-    outline: 0;
+  padding: 20px;
+  border: 0;
+  width: 100%;
+  resize: none;
+  height: 110px;
+  border-radius: 5px;
+  box-shadow: none;
+  background: #f6f7fa;
+  outline: 0;
 }
 
 .feedback .calc-modal::before {
-    left: 0;
-    right: 0;
+  left: 0;
+  right: 0;
 }
 
 .feedback .calc-modal__inner {
-    margin: 0 15px;
+  margin: 0 15px;
 }
 
 .modal-feedback {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 400px;
-    text-align: center;
-    border-radius: 10px;
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 400px;
+  text-align: center;
+  border-radius: 10px;
 }
 
 .close-btn {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .close-btn:hover,
 .close-btn:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .modal-icon {
-    font-size: 50px;
-    color: green;
-    margin-bottom: 15px;
+  font-size: 50px;
+  color: green;
+  margin-bottom: 15px;
 }
 
 .modal-message p {
-    font-size: 18px;
+  font-size: 18px;
 }
 
 .feedback__grid {
-    display: flex;
-    align-items: flex-start;
-    gap: 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
 }
 
 .feedback__image {
-    max-width: 300px;
-    height: auto;
+  max-width: 300px;
+  height: auto;
+}
+
+@media (min-width: 1201px) {
+  .feedbackSection {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    justify-content: center;
+  }
+  .feedbackSection img {
+    display: block;
+    max-width: 40%;
+  }
+  .feedback__form {
+    margin: 0;
+    gap: 30px;
+    max-width: 610px;
+  }
+
+  .feedback__label {
+    font-size: 20px;
+  }
+  .feedback__field {
+    gap: 25px;
+  }
+}
+
+@media (min-width: 767px) {
+  .feedback {
+    max-width: 80%;
+  }
 }

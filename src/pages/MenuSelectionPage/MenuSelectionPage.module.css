@@ -1,52 +1,91 @@
+/* src/pages/MenuSelectionPage/MenuSelectionPage.module.css */
+
+/* Корневой контейнер страницы */
 .page {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+  background: #f6f7fa;
 }
 
+/* Основная область страницы */
 .pageMain {
-  flex: 1;
-  padding: 20px 0;
+  padding: 35px 0; /* из .page-main */
 }
 
+/* Внутренний контейнер (тот, что .container в index.css) */
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
   padding: 0 15px;
+  width: 100%;
+  max-width: 1470px;
+  margin: 0 auto;
 }
 
+/* Заголовок страницы */
 .pageTitle {
-  font-size: 28px;
-  margin-bottom: 20px;
   text-align: center;
+  margin-bottom: 30px;
+  font-size: 35px;
+  font-weight: 700;
+  line-height: 40px;
 }
 
+/* Сетка «главная колонка + асайд» */
 .pageGrid {
-  display: grid;
-  grid-template-columns: 1fr 300px;
-  gap: 30px;
+  display: flex;
+  gap: 15px;
+  flex-direction: column; /* на мобилке */
 }
 
-.pageGridMain {
-  background: #fff;
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.pageGridAside {
-  position: sticky;
-  top: 20px;
-  height: fit-content;
-}
-
-@media (max-width: 768px) {
+@media (min-width: 767px) {
   .pageGrid {
-    grid-template-columns: 1fr;
+    flex-direction: row;
   }
+}
 
-  .pageGridAside {
-    position: static;
-    margin-top: 20px;
+/* Левая колонка (основной контент) */
+.pageGridMain {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  flex-direction: column;
+  padding: 25px;
+  flex: 1 1 auto;
+  min-width: 0;
+  border-radius: 15px;
+  background: #fff;
+}
+
+/* Правая колонка (итоги / Total widget) */
+.pageGridAside {
+  flex-shrink: 0;
+  background: #fff;
+  border-radius: 15px;
+  padding: 25px;
+  height: 450px;
+
+  /* Делаем «липкую» панель */
+  position: sticky;
+  top: 90px; /* отступ от верха окна */
+
+  max-height: calc(100vh - 40px);
+}
+
+@media (min-width: 993px) {
+  .btn {
+    font-size: 18px;
+    font-weight: 700;
   }
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 20px;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  color: #fff;
+  background: #0056d3;
+  border: 1px solid #0056d3;
+  transition: 0.5s;
 }

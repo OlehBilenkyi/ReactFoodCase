@@ -1,0 +1,82 @@
+/* src/components/MenuSelectionFeatures/MealItem/MealItem.module.css */
+
+.mealItem {
+  display: flex;
+  flex-direction: row;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.13);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.mealItemHover:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(0, 123, 255, 0.6);
+}
+
+.selected {
+  border: 2px solid #00d1ff;
+  box-shadow: 0 0 20px #00d1ff;
+  transform: scale(1.05);
+  transition: all 0.3s ease;
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.mealImage {
+  flex-shrink: 0;
+  width: 35%;
+
+  /* Новые строки: */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px; /* отступ вокруг картинки */
+}
+
+.mealImage img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+
+  /* скруглённые углы (опционально) */
+  border-radius: 6px;
+}
+
+.mealInfo {
+  flex: 1 1 auto;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  word-wrap: break-word;
+  white-space: normal;
+  overflow: hidden;
+}
+
+.mealName {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 8px;
+}
+
+.mealDescription {
+  font-size: 14px;
+  margin: 0 0 8px;
+  color: #555;
+  flex-grow: 1;
+}
+
+.mealPrice {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0056d3;
+  margin-top: 10px;
+}

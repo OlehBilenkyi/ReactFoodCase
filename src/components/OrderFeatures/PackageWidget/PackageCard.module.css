@@ -1,0 +1,75 @@
+.packageCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  border-radius: 15px;
+  background: #e0e0e0;
+  cursor: pointer;
+  text-align: center;
+  border: 1px solid #e0e0e0;
+  transition: border-color 0.3s, background 0.3s;
+}
+.packageCard:hover {
+  border-color: #0056d3;
+}
+/* выделенная карточка */
+.selected {
+  border-color: #0056d3;
+}
+
+.imageContainer {
+  margin-bottom: 8px;
+}
+.image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.info {
+  margin-bottom: 8px;
+}
+.name {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 4px 0;
+}
+.price {
+  font-size: 14px;
+  color: #333;
+}
+
+.selectButton {
+  border: 1px solid #0056d3;
+  padding: 6px 12px;
+  background: #0056d3;
+  color: #fff;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  transition: background 0.3s, color 0.3s;
+}
+.selectButton:hover {
+  background: rgba(0, 0, 0, 0);
+  color: #000;
+}
+
+/* Новые правила для выбранной карточки */
+.packageCard.selected .selectButton {
+  background: #fff;
+  color: #0056d3;
+  border-color: #0056d3;
+}
+.packageCard.selected .selectButton:hover {
+  background: #0056d3;
+  color: #fff;
+}
+
+@media (min-width: 993px) {
+  .selectButton {
+    font-size: 18px;
+    font-weight: 700;
+  }
+}

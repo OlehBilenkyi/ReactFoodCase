@@ -1,20 +1,29 @@
-import React from 'react';
-import styles from './WeightSelector.module.css';
+// src/components/WeightSelector/WeightSelector.jsx
+import React from "react";
+import styles from "./WeightSelector.module.css";
 
-const WeightSelector = ({ options, onSelect, selected }) => {
+/**
+ * Чистый компонент «кнопки-выбора веса».
+ *
+ * Пропсы:
+ *   - options: массив { weight, price }
+ *   - selected: либо { weight, price }, либо null
+ *   - onSelect: колбэк (option) => void
+ */
+const WeightSelector = ({ options, selected, onSelect }) => {
   return (
     <div className={styles.weightSelector}>
-      <h4 className={styles.selectorTitle}>Zważ wagę</h4>
       <div className={styles.weightButtons}>
-        {options.map((option, index) => (
+        {options.map((option, idx) => (
           <button
-            key={index}
+            key={idx}
+            type="button"
             className={`${styles.weightButton} ${
-              selected?.weight === option.weight ? styles.active : ''
+              selected?.weight === option.weight ? styles.active : ""
             }`}
             onClick={() => onSelect(option)}
           >
-            {option.weight} - {option.price} zł
+            {option.weight} g – {option.price} zł
           </button>
         ))}
       </div>
@@ -22,4 +31,4 @@ const WeightSelector = ({ options, onSelect, selected }) => {
   );
 };
 
-export default WeightSelector;
+export default React.memo(WeightSelector);

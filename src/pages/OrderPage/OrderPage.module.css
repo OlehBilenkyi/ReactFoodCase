@@ -24,26 +24,78 @@
   font-weight: 700;
 }
 
-.pageGrid {
+.contentGrid {
   display: flex;
   gap: 15px;
   flex-direction: column;
 }
+@media (min-width: 767px) {
+  .contentGrid {
+    flex-direction: row;
+  }
+}
+
+.mainColumn {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.deliveryStep {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Делает поля именно как на втором скриншоте */
+.deliveryStep input {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  color: #333;
+  box-shadow: none;
+}
+.deliveryStep input:focus {
+  border-color: #0056d3;
+}
+.deliveryStep input:disabled,
+.deliveryStep input[readonly] {
+  background-color: #f6f7fa;
+  opacity: 1;
+}
+
+.asideColumn {
+  height: 470px;
+  flex-shrink: 0;
+  background: #fff;
+  border-radius: 15px;
+  padding: 25px;
+  position: sticky;
+  top: 90px;
+  max-height: calc(100vh - 40px);
+}
 
 @media (min-width: 1201px) {
-  .pageGrid {
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 30px;
-  }
-
   .pageMain {
     padding: 70px 0;
   }
-
   .pageTitle {
     font-size: 50px;
     line-height: 55px;
     margin-bottom: 50px;
   }
+}
+
+.hidden {
+  display: none;
+}
+.background {
+  display: flex;
+
+  flex-direction: column;
+  padding: 25px;
+  flex: 1 1 auto;
+  min-width: 0;
+  border-radius: 15px;
+  background: #fff;
 }

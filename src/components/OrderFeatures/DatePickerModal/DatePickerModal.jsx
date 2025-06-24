@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { useModal } from "../ModalManager/useModal";
+import React, { useState, useEffect, useRef } from "react"; // ← добавили useRef
+import useModal from "../ModalManager/useModal";
 import AirDatepicker from "air-datepicker";
 import "air-datepicker/air-datepicker.css";
-import styles from "./DatePickerModal.module.css";
+import styles from "../../MenuSelectionFeatures/DatePickerModal/DatePickerModal.module.css";
 
 const DatePickerModal = () => {
   const { closeModal, modalProps } = useModal();
@@ -11,6 +11,7 @@ const DatePickerModal = () => {
     initialDates = [],
     onSelect,
   } = modalProps["date-picker"] || {};
+
   const [selectedDates, setSelectedDates] = useState(initialDates);
   const datepickerRef = useRef(null);
 
@@ -23,6 +24,7 @@ const DatePickerModal = () => {
       selectedDates: initialDates,
       minDate: new Date(),
       onSelect: ({ date }) => {
+        // “date” może być albo pojedynczą datą, albo tablicą dat
         setSelectedDates(Array.isArray(date) ? date : [date]);
       },
     });
@@ -55,5 +57,4 @@ const DatePickerModal = () => {
     </div>
   );
 };
-
 export default DatePickerModal;

@@ -1,34 +1,32 @@
 .multiStepForm {
-  position: relative;
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.stepContent {
+  margin-bottom: 20px;
 }
 
 .navigation {
   display: flex;
   justify-content: space-between;
-  margin-top: 30px;
 }
 
-.prevButton,
-.nextButton,
-.submitButton {
-  padding: 12px 24px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.prevButton {
-  background: #f0f0f0;
-  border: 1px solid #ddd;
-}
-
-.nextButton,
-.submitButton {
-  background: #006a23;
-  color: white;
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  background: #0056d3;
+  color: #fff;
   border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background 0.3s;
+  font-size: 14px;
 }
 
-.nextButton:hover,
-.submitButton:hover {
-  background: #00561c;
+.btn:hover {
+  background: #0041a8;
 }

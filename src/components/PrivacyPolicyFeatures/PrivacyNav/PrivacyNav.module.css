@@ -1,30 +1,57 @@
-.page-nav {
+.nav {
   display: flex;
   flex-direction: column;
   gap: 20px;
   margin: 0;
   padding: 30px;
-  list-style-type: none;
 }
 
-.page-nav__item {
-  /* Стили для пунктов меню */
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
-.page-nav__link {
+/* контейнер одного пункта */
+.item {
+  position: relative; /* чтобы ::before у .link привязался именно к этому элементу */
+  /* отступ слева под кружок */
+  padding-left: 12px;
+}
+
+/* сама ссылка */
+.link {
+  display: inline-block; /* или block, если нужно, главное — не position: static */
   font-weight: 600;
-  color: inherit;
   text-decoration: none;
-  transition: color 0.3s ease;
+  color: inherit;
+  transition: color 0.2s;
 }
 
-.page-nav__link:hover,
-.page-nav__link:active {
+/* синий кружок перед каждой ссылкой */
+.link::before {
+  content: "";
+  position: absolute;
+  /* привязываем к .item (родитель .item со relative) */
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  background-color: #0056d3;
+  border-radius: 50%;
+}
+
+.link:hover,
+.link:active {
   color: #0056d3;
 }
 
 @media (max-width: 992px) {
-  .page-nav {
+  .nav {
     padding: 20px;
   }
 }

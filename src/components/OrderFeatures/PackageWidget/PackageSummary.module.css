@@ -1,0 +1,99 @@
+/* src/components/OrderFeatures/PackageWidget/PackageSummary.module.css */
+.summaryContainer {
+  display: flex;
+  align-items: center;
+  flex: 1 1 auto;
+  position: relative;
+  padding: 15px;
+  background: #e0e0e0;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.imageWrapper {
+  display: flex;
+  justify-content: center; /* по горизонтали */
+  align-items: center; /* по вертикали */
+  /* можно задать фиксированную ширину, если нужно */
+  flex: 0 0 40%;
+}
+
+/* сам <img> займёт, скажем, 80% от обёртки и центрируется автоматически */
+.imageWrapper img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  display: block;
+}
+
+.details {
+  flex: 1;
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.row {
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
+  font-size: 14px;
+  line-height: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid #fff;
+}
+
+.row:last-child {
+  align-items: flex-end;
+  border-bottom: none;
+}
+
+.priceContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.original {
+  text-decoration: line-through;
+  color: #888;
+  font-size: 13px;
+}
+
+.final {
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.badge {
+  background: #e53e3e;
+  color: #fff;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+/* Контейнер для inline-календаря */
+.inlinePicker {
+  margin-top: 12px;
+  /* можно задать фиксированную ширину: например, width: 260px; */
+}
+@media (min-width: 1201px) {
+  .summaryContainer {
+    padding: 15px 20px;
+    min-height: 292px;
+  }
+}
+@media (min-width: 993px) {
+  .summaryContainer {
+    flex-direction: row;
+    gap: 20px;
+  }
+  .imageWrapper {
+    flex: 0 0 40%;
+  }
+}

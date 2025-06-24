@@ -1,5 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styles from "./PriceCalculator.module.css";
+
+// Хелпер для процента
+const getPercent = (value, min, max) => ((value - min) * 100) / (max - min);
+
+// Компонент range с динамическим фоном
+const RangeInput = ({ name, min, max, value, onChange }) => {
+  const ref = useRef(null);
+
+  const updateBg = () => {
+    const pct = getPercent(Number(value), Number(min), Number(max));
+    if (ref.current) {
+      ref.current.style.background = `linear-gradient(to right, #0056d3 0%, #0056d3 ${pct}%, #d7d7d7 ${pct}%, #d7d7d7 100%)`;
+    }
+  };
+
+  // при монтировании и при каждом изменении value
+  useEffect(updateBg, [value]);
+
+  return (
+    <input
+      ref={ref}
+      type="range"
+      name={name}
+      min={min}
+      max={max}
+      value={value}
+      onChange={onChange}
+      onInput={updateBg}
+      className={styles.calculatorRangeInput}
+    />
+  );
+};
 
 const PriceCalculator = () => {
   const [formData, setFormData] = useState({
@@ -26,7 +58,6 @@ const PriceCalculator = () => {
   };
 
   const calculateCalories = () => {
-    // Harris-Benedict equation
     let bmr;
     if (formData.gender === "male") {
       bmr =
@@ -44,7 +75,6 @@ const PriceCalculator = () => {
 
     const calories = bmr * parseFloat(formData.activity);
 
-    // Determine recommendation
     let recommendation;
     if (calories < 1500) recommendation = "1200";
     else if (calories < 1800) recommendation = "1500";
@@ -66,6 +96,7 @@ const PriceCalculator = () => {
       <h2 className={styles.calculatorTitle}>Kalkulator kalorii</h2>
 
       <div className={styles.calculatorGrid}>
+        {/* ВОЗРАСТ */}
         <div className={styles.calculatorField}>
           <label className={styles.calculatorLabel}>Wiek (lata):</label>
           <div className={styles.calculatorRange}>
@@ -77,17 +108,17 @@ const PriceCalculator = () => {
               onChange={handleChange}
               name="age"
             />
-            <input
-              type="range"
+            <RangeInput
+              name="age"
               min="10"
               max="80"
               value={formData.age}
               onChange={handleChange}
-              name="age"
             />
           </div>
         </div>
 
+        {/* ПОЛ */}
         <div className={styles.calculatorField}>
           <label className={styles.calculatorLabel}>Płeć:</label>
           <select
@@ -101,6 +132,7 @@ const PriceCalculator = () => {
           </select>
         </div>
 
+        {/* ВЕС */}
         <div className={styles.calculatorField}>
           <label className={styles.calculatorLabel}>Waga (kg):</label>
           <div className={styles.calculatorRange}>
@@ -112,17 +144,17 @@ const PriceCalculator = () => {
               onChange={handleChange}
               name="weight"
             />
-            <input
-              type="range"
+            <RangeInput
+              name="weight"
               min="10"
               max="200"
               value={formData.weight}
               onChange={handleChange}
-              name="weight"
             />
           </div>
         </div>
 
+        {/* ВЫСОТА */}
         <div className={styles.calculatorField}>
           <label className={styles.calculatorLabel}>Wysokość (cm):</label>
           <div className={styles.calculatorRange}>
@@ -134,17 +166,17 @@ const PriceCalculator = () => {
               onChange={handleChange}
               name="height"
             />
-            <input
-              type="range"
+            <RangeInput
+              name="height"
               min="100"
               max="300"
               value={formData.height}
               onChange={handleChange}
-              name="height"
             />
           </div>
         </div>
 
+        {/* АКТИВНОСТЬ */}
         <div className={styles.calculatorField}>
           <label className={styles.calculatorLabel}>Poziom aktywności:</label>
           <select
@@ -156,7 +188,7 @@ const PriceCalculator = () => {
             <option value="1.2">Minimum</option>
             <option value="1.375">Lekka aktywność</option>
             <option value="1.55">Umiarkowana aktywność</option>
-            <option value="1.725">Wysoka aktywność</option>
+            <option value="1.725">Wysока aktywność</option>
             <option value="1.9">Bardzo duża aktywność</option>
           </select>
         </div>
@@ -167,7 +199,9 @@ const PriceCalculator = () => {
       </button>
 
       {modalOpen && (
-        <div className={styles.calculatorModal}>
+        <div
+          className={`${styles.calculatorModal} ${styles.calculatorModalOpen}`}
+        >
           <div className={styles.modalInner}>
             <button
               className={styles.modalClose}
@@ -207,5 +241,4 @@ const PriceCalculator = () => {
     </div>
   );
 };
-
 export default PriceCalculator;

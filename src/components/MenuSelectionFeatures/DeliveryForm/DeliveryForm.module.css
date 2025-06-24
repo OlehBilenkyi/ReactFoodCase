@@ -1,0 +1,17 @@
+.deliveryWidget {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+/* Если нужно добавить стили для <form> */
+.form {
+  width: 100%;
+}
+#deliveryForm input:invalid {
+  border-color: #e74c3c; /* ярко-красный бордер */
+}
+#deliveryForm input:valid {
+  border-color: #e0e0e0; /* обычный цвет */
+}

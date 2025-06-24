@@ -1,55 +1,20 @@
-.packageSelection {
-  width: 100%;
+.container {
+  /* max-width: 800px; */
+  margin: 0 auto;
 }
 
-.payWidget {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  position: relative;
-  border-bottom: 1px solid #e0e0e0;
-}
-
-.payWidgetGrid {
-  display: flex;
-  gap: 10px;
-  flex-wrap: nowrap;
-  overflow: auto;
-}
-
-.payWidgetTitle {
-  margin-bottom: 20px;
-  font-size: 25px;
-  font-weight: 600;
-}
-
-.payWidgetInfo {
-  margin-bottom: 20px;
-  font-size: 12px;
-  font-weight: 700;
-  color: #fff;
+.addButton {
+  margin-top: 20px;
   padding: 10px 20px;
-  border-radius: 10px;
-  background: linear-gradient(90deg, #0056d3 0, #2e7beb 100%);
+  background: #0056d3;
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s;
 }
 
-.payWidgetMore {
-  margin-left: auto;
-  margin-right: auto;
-  background: rgba(0, 0, 0, 0);
-  color: #000;
-  border-color: #0056d3;
-}
-
-@media (min-width: 767px) {
-  .payWidgetGrid {
-    display: grid;
-    gap: 15px;
-    overflow: inherit;
-    grid-template-columns: repeat(5, 1fr);
-  }
-
-  .payWidgetMore {
-    margin-left: 0;
-  }
+.addButton:hover {
+  background: #0041a8;
 }

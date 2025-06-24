@@ -1,3 +1,5 @@
+// src/components/Pricing/PriceRow/PriceRow.jsx
+
 import React from "react";
 import styles from "./PriceRow.module.css";
 import PriceCell from "@components/Pricing/PriceCell/PriceCell";
@@ -5,42 +7,40 @@ import PriceCell from "@components/Pricing/PriceCell/PriceCell";
 const PriceRow = ({ price, discounts }) => {
   const { name, price: pricePerDay, image } = price;
 
-  // Calculate prices with discounts
+  // Функция расчёта со скидкой
   const calculateDiscountedPrice = (days, discountPercent) => {
     const originalPrice = pricePerDay * days;
     const discountedPrice = originalPrice * (1 - discountPercent / 100);
     return { original: originalPrice, discounted: discountedPrice };
   };
 
-  const price20Days = calculateDiscountedPrice(20, discounts[20]);
-  const price24Days = calculateDiscountedPrice(24, discounts[24]);
-  const price28Days = calculateDiscountedPrice(28, discounts[28]);
+  const price20 = calculateDiscountedPrice(20, discounts[20]);
+  const price24 = calculateDiscountedPrice(24, discounts[24]);
+  const price28 = calculateDiscountedPrice(28, discounts[28]);
 
   return (
     <tr>
-      <td>
-        <span>
-          <img src={`/uploads_img${image}`} alt={`${name} kalorii`} />
+      <td className={styles.firstCell}>
+        {/* Используем image напрямую, без дополнительных префиксов */}
+
+        <span className={styles.mealLabel}>
+          {" "}
+          <img
+            src={image}
+            alt={`${name} kalorii`}
+            className={styles.mealIcon}
+          />
           {name} Kalorii
         </span>
       </td>
 
       <PriceCell price={pricePerDay} />
 
-      <PriceCell
-        price={price20Days.discounted}
-        originalPrice={price20Days.original}
-      />
+      <PriceCell price={price20.discounted} originalPrice={price20.original} />
 
-      <PriceCell
-        price={price24Days.discounted}
-        originalPrice={price24Days.original}
-      />
+      <PriceCell price={price24.discounted} originalPrice={price24.original} />
 
-      <PriceCell
-        price={price28Days.discounted}
-        originalPrice={price28Days.original}
-      />
+      <PriceCell price={price28.discounted} originalPrice={price28.original} />
     </tr>
   );
 };

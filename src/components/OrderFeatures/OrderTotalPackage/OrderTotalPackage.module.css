@@ -1,0 +1,119 @@
+/* Обёртка всего блока */
+.pay-total {
+  padding: 25px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+@media (min-width: 993px) {
+  .pay-total {
+    padding: 30px;
+  }
+}
+
+/* Отдельная строка (item) в блоке */
+.pay-total__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.pay-total__item.packgs {
+  /* можно добавить специфичные отступы */
+}
+
+.pay-total__item:first-child {
+  padding-top: 0;
+}
+
+@media (min-width: 993px) {
+  .pay-total__item {
+    padding: 25px 0;
+  }
+}
+
+/* Название и значение внутри .pay-total__item */
+.pay-total__item b {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.pay-total__item span {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+@media (min-width: 993px) {
+  .pay-total__item b {
+    font-size: 20px;
+  }
+  .pay-total__item span {
+    font-size: 18px;
+  }
+}
+
+/* Стили для скидки и итоговой суммы */
+.pay-total__item.discount span {
+  color: red;
+  font-weight: bold;
+}
+
+.pay-total__item.sum span {
+  color: #006a23;
+  font-weight: bold;
+}
+
+/* Блок с чекбоксом */
+.accept-terms {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 20px 0;
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.accept-terms input {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.accept-terms a {
+  color: #0056d3;
+  text-decoration: underline;
+}
+
+/* Кнопка «Przejdź do płatności» */
+.pay-total__send {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 310px;
+  padding: 15px 20px;
+  margin: 0 auto;
+  border-radius: 50px;
+  background: #0056d3;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  border: 1px solid #0056d3;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+}
+
+.pay-total__send:hover {
+  background: #0041a1;
+}
+
+/* Состояние disabled */
+.disabled {
+  pointer-events: none;
+  background: #e0e0e0 !important;
+  border-color: #e0e0e0 !important;
+  color: #888 !important;
+}

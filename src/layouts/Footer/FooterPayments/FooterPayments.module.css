@@ -1,29 +1,17 @@
 .column {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
-
 .title {
-  margin-bottom: 20px;
   font-weight: 700;
   font-size: 16px;
 }
-
 .paymentMethods {
-  justify-content: center;
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  gap: 12px;
+  align-items: center;
 }
-
 .paymentMethod img {
-  height: 30px;
-  width: auto;
-}
-
-@media (min-width: 767px) {
-  .paymentMethods {
-    justify-content: flex-start;
-  }
+  max-height: 32px;
 }

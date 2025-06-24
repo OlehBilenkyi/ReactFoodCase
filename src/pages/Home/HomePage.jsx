@@ -6,16 +6,18 @@ import OrderButton from "../../components/HomePageFeatures/Order/OrderButton";
 import OrderOptions from "../../components/HomePageFeatures/Order/OrderOptions";
 
 import Feedback from "../../components/HomePageFeatures/Feedback/Feedback";
-
+import styles from "./HomePage.module.css";
 const HomePage = () => {
   return (
     <div>
       <Promo />
-      <Advantages />
-      <CalorieCalculator />
-      <OrderButton />
-      <OrderOptions />
-      <Feedback />
+      <div className={styles.HomePageContainer}>
+        <Advantages />
+        <CalorieCalculator />
+        <OrderButton />
+        <OrderOptions />
+        <Feedback />
+      </div>
     </div>
   );
 };

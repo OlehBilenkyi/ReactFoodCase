@@ -1,13 +1,14 @@
-import { PAYMENT_METHODS } from "../../../constants/footerData";
+import React from "react";
+import { PAYMENT_METHODS } from "../../../constants/footerData.jsx";
 import styles from "./FooterPayments.module.css";
 
 const FooterPayments = () => (
   <div className={styles.column}>
-    <h3 className={styles.title}>Metody płatności:</h3>
+    <div className={styles.title}>Metody płatności:</div>
     <div className={styles.paymentMethods}>
-      {PAYMENT_METHODS.map((method) => (
-        <div key={method.alt} className={styles.paymentMethod}>
-          <img src={method.image} alt={method.alt} />
+      {PAYMENT_METHODS.map((m) => (
+        <div key={m.alt} className={styles.paymentMethod}>
+          <img src={m.image} alt={m.alt} />
         </div>
       ))}
     </div>

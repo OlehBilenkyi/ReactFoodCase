@@ -1,211 +1,148 @@
-import React, { useState, useCallback, useEffect, useMemo } from "react";
-import PropTypes from "prop-types";
-import { useModal } from "../ModalManager/useModal";
+// src/components/OrderFeatures/PackageWidget/PackageWidget.jsx
+import React, { useState, useRef, useEffect } from "react";
+import AirDatepicker from "air-datepicker";
+import pl from "air-datepicker/locale/pl";
+import "air-datepicker/air-datepicker.css";
 import styles from "./PackageWidget.module.css";
+import PackageCard from "./PackageCard";
+import PackageSummary from "./PackageSummary";
 
-// Выносим подкомпоненты в отдельные константы
-const PackageCard = React.memo(({ package: pkg, isSelected, onSelect }) => (
-  <div
-    className={`${styles.packageCard} ${isSelected ? styles.selected : ""}`}
-    onClick={() => onSelect(pkg)}
-    role="button"
-    tabIndex={0}
-    aria-pressed={isSelected}
-  >
-    <div className={styles.packageImageContainer}>
-      <img
-        src={pkg.image}
-        alt={`${pkg.name} kalorii`}
-        className={styles.packageImage}
-        loading="lazy"
-      />
-    </div>
-    <div className={styles.packageInfo}>
-      <h3 className={styles.packageName}>{pkg.name} kalorii</h3>
-      <div className={styles.packagePrice}>{pkg.price.toFixed(2)} zł</div>
-    </div>
-    <div className={styles.selectButton}>
-      {isSelected ? "Wybrany" : "Wybierać"}
-    </div>
-  </div>
-));
-
-const SelectedPackageDetails = React.memo(
-  ({ package: pkg, dates, priceInfo, onDateSelect }) => (
-    <div className={styles.selectedPackage}>
-      <div className={styles.packageSummary}>
-        <div className={styles.summaryImage}>
-          <img src={pkg.image} alt="" loading="lazy" />
-        </div>
-
-        <div className={styles.summaryDetails}>
-          <h4>{pkg.name} kalorii</h4>
-
-          <div className={styles.summaryRow}>
-            <span>Ilość dni:</span>
-            <strong>{priceInfo.days || 0}</strong>
-          </div>
-
-          <div className={styles.summaryRow}>
-            <span>Data dostawy:</span>
-            <div>{dates.length > 0 ? dates.join(", ") : "nie wybrano"}</div>
-          </div>
-
-          <div className={styles.summaryRow}>
-            <span>Cena:</span>
-            <div className={styles.priceContainer}>
-              {priceInfo.discount > 0 && (
-                <span className={styles.originalPrice}>
-                  {priceInfo.originalPrice?.toFixed(2)} zł
-                </span>
-              )}
-              <span className={styles.finalPrice}>
-                {priceInfo.price.toFixed(2)} zł
-              </span>
-              {priceInfo.discountPercent > 0 && (
-                <span className={styles.discountBadge}>
-                  -{priceInfo.discountPercent}%
-                </span>
-              )}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <button
-        onClick={onDateSelect}
-        className={styles.datePickerButton}
-        aria-label="Wybierz daty dostawy"
-      >
-        Wybierz daty
-      </button>
-    </div>
-  )
-);
-
-const PackageWidget = ({ packages, isFirst, onRemove, onSelectionChange }) => {
+export default React.memo(function PackageWidget({
+  packages,
+  isFirst,
+  onRemove,
+  onSelectionChange,
+}) {
   const [selectedPackage, setSelectedPackage] = useState(null);
   const [selectedDates, setSelectedDates] = useState([]);
-  const { openModal } = useModal();
+  const [pickerVisible, setPickerVisible] = useState(false);
 
-  // Автовыбор первого пакета при монтировании
-  useEffect(() => {
-    if (packages.length > 0 && !selectedPackage) {
-      handlePackageSelect(packages[0]);
+  const pickerRef = useRef(null);
+  const dpInstance = useRef(null);
+
+  // Функция расчёта количества дней и цены
+  const calc = (pkg, dates) => {
+    if (!pkg || dates.length === 0) {
+      return { days: 0, originalPrice: 0, price: 0, discountPercent: 0 };
     }
-  }, [packages]);
-
-  const handlePackageSelect = useCallback(
-    (pkg) => {
-      setSelectedPackage(pkg);
-      setSelectedDates([]);
-      onSelectionChange?.({
-        packageId: pkg.id,
-        dates: [],
-        price: 0,
-        packageData: pkg,
-      });
-    },
-    [onSelectionChange]
-  );
-
-  const handleDateSelect = useCallback(() => {
-    if (!selectedPackage) return;
-
-    openModal("date-picker", {
-      packageId: selectedPackage.id,
-      initialDates: selectedDates,
-      onSelect: (dates) => {
-        setSelectedDates(dates);
-        const priceInfo = calculatePriceInfo(selectedPackage, dates);
-        onSelectionChange?.({
-          packageId: selectedPackage.id,
-          dates,
-          ...priceInfo,
-          packageData: selectedPackage,
-        });
-      },
-    });
-  }, [selectedPackage, selectedDates, openModal, onSelectionChange]);
-
-  const calculatePriceInfo = useCallback((pkg, dates) => {
-    if (!pkg || dates.length === 0) return { price: 0, discount: 0 };
-
     const days = dates.length;
-    let discountPercent = 0;
-
-    if (days >= 28) discountPercent = pkg.discount3;
-    else if (days >= 24) discountPercent = pkg.discount2;
-    else if (days >= 20) discountPercent = pkg.discount1;
-
+    let dp =
+      days >= 28
+        ? pkg.discount3
+        : days >= 24
+        ? pkg.discount2
+        : days >= 20
+        ? pkg.discount1
+        : 0;
     const originalPrice = pkg.price * days;
-    const discountAmount = (originalPrice * discountPercent) / 100;
-    const finalPrice = originalPrice - discountAmount;
-
+    const discount = (originalPrice * dp) / 100;
     return {
-      price: finalPrice,
-      originalPrice,
-      discount: discountAmount,
-      discountPercent,
       days,
+      originalPrice,
+      price: originalPrice - discount,
+      discountPercent: dp,
     };
-  }, []);
+  };
 
-  const priceInfo = useMemo(
-    () => calculatePriceInfo(selectedPackage, selectedDates),
-    [selectedPackage, selectedDates, calculatePriceInfo]
-  );
+  // Инициализация и уничтожение даты-пикера
+  useEffect(() => {
+    if (pickerVisible && pickerRef.current) {
+      // Конвертируем строки "DD.MM.YYYY" в Date
+      const initialJsDates = selectedDates
+        .map((str) => {
+          const [dd, mm, yyyy] = str.split(".");
+          return new Date(`${yyyy}-${mm}-${dd}`);
+        })
+        .filter((d) => !isNaN(d));
+
+      dpInstance.current = new AirDatepicker(pickerRef.current, {
+        inline: true,
+        locale: pl,
+        minDate: new Date(),
+        multipleDates: true,
+        multipleDatesSeparator: ", ",
+        selectedDates: initialJsDates, // сразу передаём уже выбранные даты
+        onSelect({ datepicker }) {
+          const arr = datepicker.selectedDates.map((d) =>
+            d.toLocaleDateString("pl-PL", {
+              day: "2-digit",
+              month: "2-digit",
+              year: "numeric",
+            })
+          );
+          updateDates(arr);
+        },
+      });
+    }
+
+    // При скрытии или размонтировании — уничтожаем инстанс
+    return () => {
+      if (dpInstance.current) {
+        dpInstance.current.destroy();
+        dpInstance.current = null;
+      }
+    };
+  }, [pickerVisible]); // слушаем только флаг видимости
+
+  // По клику на карточку — селектим пакет и открываем календарь
+  const selectPkg = (pkg) => {
+    setSelectedPackage(pkg);
+    setSelectedDates([]);
+    setPickerVisible(true);
+    onSelectionChange({
+      packageId: pkg.id,
+      dates: [],
+      ...calc(pkg, []),
+      packageData: pkg,
+    });
+  };
+
+  // Обновляем даты и пересылаем наверх
+  const updateDates = (dates) => {
+    setSelectedDates(dates);
+    onSelectionChange({
+      packageId: selectedPackage.id,
+      dates,
+      ...calc(selectedPackage, dates),
+      packageData: selectedPackage,
+    });
+  };
+
+  const priceInfo = selectedPackage ? calc(selectedPackage, selectedDates) : {};
 
   return (
-    <div className={styles.widgetContainer} data-testid="package-widget">
+    <div className={styles.widgetContainer}>
       <div className={styles.packageGrid}>
         {packages.map((pkg) => (
           <PackageCard
             key={pkg.id}
-            package={pkg}
-            isSelected={selectedPackage?.id === pkg.id}
-            onSelect={handlePackageSelect}
+            pkg={pkg}
+            selected={selectedPackage?.id === pkg.id}
+            onSelect={() => selectPkg(pkg)}
           />
         ))}
       </div>
 
       {selectedPackage && (
-        <SelectedPackageDetails
-          package={selectedPackage}
-          dates={selectedDates}
-          priceInfo={priceInfo}
-          onDateSelect={handleDateSelect}
-        />
+        <div className={styles.summaryAndCalendar}>
+          <PackageSummary
+            pkg={selectedPackage}
+            dates={selectedDates}
+            priceInfo={priceInfo}
+            onToggleCalendar={() => setPickerVisible((v) => !v)}
+            onChangeDates={updateDates}
+          />
+          {pickerVisible && (
+            <div ref={pickerRef} className={styles.calendarAside} />
+          )}
+        </div>
       )}
 
       {!isFirst && (
-        <button
-          onClick={onRemove}
-          className={styles.removeButton}
-          aria-label="Remove package"
-        >
+        <button onClick={onRemove} className={styles.removeButton}>
           Usuń pakiet
         </button>
       )}
     </div>
   );
-};
-
-PackageWidget.propTypes = {
-  packages: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-      price: PropTypes.number.isRequired,
-      image: PropTypes.string.isRequired,
-      discount1: PropTypes.number,
-      discount2: PropTypes.number,
-      discount3: PropTypes.number,
-    })
-  ).isRequired,
-  isFirst: PropTypes.bool,
-  onRemove: PropTypes.func,
-  onSelectionChange: PropTypes.func,
-};
-
-export default React.memo(PackageWidget);
+});

@@ -3,14 +3,20 @@ import styles from "./PricingPage.module.css";
 import PriceTable from "@components/Pricing/PriceTable/PriceTable.jsx";
 import CalorieCalculator from "../../components/HomePageFeatures/CalorieCalculator/PriceCalculator";
 
+import Package1200 from "../../assets/img/pay/1.png";
+import Package1500 from "../../assets/img/pay/2.png";
+import Package1800 from "../../assets/img/pay/3.png";
+import Package2000 from "../../assets/img/pay/4.png";
+import Package2500 from "../../assets/img/pay/5.png";
+
 const PricingPage = () => {
   const prices = [
     // This would come from your API/backend
-    { name: "1200", price: 85, image: "/1200-cal.jpg" },
-    { name: "1500", price: 90, image: "/1500-cal.jpg" },
-    { name: "1800", price: 95, image: "/1800-cal.jpg" },
-    { name: "2000", price: 100, image: "/2000-cal.jpg" },
-    { name: "2500", price: 110, image: "/2500-cal.jpg" },
+    { name: "1200", price: 85, image: Package1200 },
+    { name: "1500", price: 90, image: Package1500 },
+    { name: "1800", price: 95, image: Package1800 },
+    { name: "2000", price: 100, image: Package2000 },
+    { name: "2500", price: 110, image: Package2500 },
   ];
 
   const discounts = {

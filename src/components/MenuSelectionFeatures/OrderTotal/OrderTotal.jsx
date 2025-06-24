@@ -1,98 +1,55 @@
-import React, { useState } from "react";
-import { loadStripe } from "@stripe/stripe-js";
+import React, { useState, useEffect } from "react";
 import styles from "./OrderTotal.module.css";
 
-const stripePromise = loadStripe("YOUR_STRIPE_PUBLISHABLE_KEY");
-
-const OrderTotal = ({ order, currentStep, onNextStep, onPrevStep }) => {
+export default function OrderTotal({
+  order = {},
+  currentStep,
+  onNextStep,
+  onPrevStep,
+  isStep1Valid,
+  isStep2Valid, // <-- принимаем
+}) {
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
 
-  const calculateTotal = () => {
-    return order.selectedMeals.reduce((sum, meal) => sum + meal.price, 0);
+  // Если потеряли валидность шага 1 или 2 — сбрасываем чекбокс
+  useEffect(() => {
+    if (
+      termsAccepted &&
+      ((currentStep === 1 && !isStep1Valid) ||
+        (currentStep === 2 && !isStep2Valid))
+    ) {
+      setTermsAccepted(false);
+    }
+  }, [currentStep, isStep1Valid, isStep2Valid, termsAccepted]);
+
+  const meals = Array.isArray(order.selectedMeals) ? order.selectedMeals : [];
+  const dates = Array.isArray(order.selectedDates) ? order.selectedDates : [];
+  const total = meals.reduce((sum, m) => sum + (m.price || 0), 0);
+
+  const handleNext = () => {
+    // на шаге 2 блокируем, если форма не валидна
+    if (!termsAccepted) return;
+    onNextStep();
   };
 
-  const handlePayment = async () => {
+  const handlePay = () => {
     if (!termsAccepted) return;
-
     setIsProcessing(true);
-    try {
-      const stripe = await stripePromise;
-
-      // 1. Сохраняем заказ
-      const saveOrderResponse = await fetch("/api/save-order", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          order: order,
-          csrf_token: document.querySelector('meta[name="csrf-token"]')
-            ?.content,
-        }),
-      });
-
-      const saveOrderResult = await saveOrderResponse.json();
-
-      if (!saveOrderResult.success) {
-        throw new Error(
-          saveOrderResult.message || "Błąd podczas zapisywania zamówienia"
-        );
-      }
-
-      // 2. Создаем сессию оплаты Stripe
-      const response = await fetch("/api/create-checkout-session", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          order_id: saveOrderResult.order_id,
-          total_amount: calculateTotal(),
-          customer_email: order.delivery.email,
-          items: order.selectedMeals.map((item) => ({
-            name: item.name,
-            price: item.price,
-            quantity: 1,
-          })),
-        }),
-      });
-
-      const session = await response.json();
-
-      // 3. Перенаправляем на страницу оплаты Stripe
-      const result = await stripe.redirectToCheckout({
-        sessionId: session.id,
-      });
-
-      if (result.error) {
-        throw new Error(result.error.message);
-      }
-    } catch (error) {
-      console.error("Błąd płatności:", error);
-      alert(`Wystąpił błąd: ${error.message}`);
-    } finally {
-      setIsProcessing(false);
-    }
+    onNextStep();
   };
 
   return (
     <div className={styles.orderTotal}>
       <div className={styles.totalItem}>
-        <b>Wybrane daty:</b>
-        <span>{order.selectedDates?.length || 1}</span>
+        <b>Wybrane daty:</b> <span>{dates.length}</span>
       </div>
-
       <div className={styles.totalItem}>
-        <b>Liczba dań:</b>
-        <span>{order.selectedMeals.length}</span>
+        <b>Liczba dań:</b> <span>{meals.length}</span>
       </div>
-
       <div className={styles.totalItem}>
-        <b>Razem do zapłaty:</b>
-        <span className={styles.totalPrice}>
-          {calculateTotal().toFixed(2)} zł
-        </span>
+        <b>Razem do zapłaty:</b>{" "}
+        <span className={styles.totalPrice}>{total.toFixed(2)} zł</span>
       </div>
 
       <label className={styles.termsCheckbox}>
@@ -100,49 +57,49 @@ const OrderTotal = ({ order, currentStep, onNextStep, onPrevStep }) => {
           type="checkbox"
           checked={termsAccepted}
           onChange={(e) => setTermsAccepted(e.target.checked)}
+          disabled={
+            (currentStep === 1 && !isStep1Valid) ||
+            (currentStep === 2 && !isStep2Valid)
+          }
         />
-        <span>
-          Zapoznałem się z zasadami strony i{" "}
-          <a href="/regulamin/" target="_blank">
-            Regulamin
-          </a>
-          .
-        </span>
+        <span>Zapoznałem się z regulaminem</span>
       </label>
 
-      {currentStep < 3 && (
+      {currentStep === 1 && (
         <button
-          className={styles.nextButton}
-          onClick={onNextStep}
-          disabled={!termsAccepted || isProcessing}
+          className={`${styles.nextButton} ${
+            (!termsAccepted || !isStep1Valid) && styles.disabled
+          }`}
+          onClick={handleNext}
+          disabled={!termsAccepted || !isStep1Valid}
         >
-          {currentStep === 1
-            ? "Podaj adres dostawy"
-            : "Podsumowanie zamówienia"}
+          Podaj adres dostawy
         </button>
       )}
 
-      {currentStep > 1 && (
+      {currentStep === 2 && (
         <button
-          className={styles.backButton}
-          onClick={onPrevStep}
-          disabled={isProcessing}
+          className={`${styles.nextButton} ${
+            (!termsAccepted || !isStep2Valid) && styles.disabled
+          }`}
+          onClick={handleNext}
+          disabled={!termsAccepted || !isStep2Valid}
         >
-          {currentStep === 2 ? "Zmień kolejność" : "Edytuj dane"}
+          Podsumowania zamówienia
         </button>
       )}
 
       {currentStep === 3 && (
         <button
-          className={styles.payButton}
-          onClick={handlePayment}
+          className={`${styles.payButton} ${
+            (!termsAccepted || isProcessing) && styles.disabled
+          }`}
+          onClick={handlePay}
           disabled={!termsAccepted || isProcessing}
         >
-          {isProcessing ? "Przetwarzanie..." : "Płatność"}
+          Płatność
         </button>
       )}
     </div>
   );
-};
-
-export default OrderTotal;
+}

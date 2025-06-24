@@ -1,0 +1,63 @@
+/* WeightSelector.module.css */
+
+/* Обёртка для всего блока выбора веса */
+.weightSelector {
+  align-items: center;
+  padding-bottom: 10px;
+  display: flex;
+  justify-content: space-evenly;
+  gap: 10px;
+  flex-direction: row;
+}
+
+/* Заголовок “Zważ wagę” */
+.selectorTitle {
+  font-size: 25px;
+}
+
+/* Контейнер для всех кнопок веса */
+.weightButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+/* На экранах от 560px и выше – кнопки в одну строку */
+@media screen and (min-width: 560px) {
+  .weightButtons {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+/* Каждая кнопка веса */
+.weightButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: #fff;
+  background: #0056d3;
+  border: none;
+  transition: background-color 0.5s, transform 0.3s;
+  cursor: pointer;
+}
+
+/* Hover-эффект для кнопок */
+.weightButton:hover {
+  background-color: #0040a8;
+  transform: scale(1.05);
+}
+
+/* Когда вес выбран (класс .active) */
+.active {
+  border: 2px solid #00d1ff;
+  background-color: #e6f7ff;
+  color: #005580;
+  box-shadow: 0 0 10px rgba(0, 170, 255, 0.5);
+}

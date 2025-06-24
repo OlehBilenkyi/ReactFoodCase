@@ -1,0 +1,104 @@
+.row {
+  width: 100%;
+  padding: 0 0 20px;
+  border-bottom: 1px solid #e0e0e0;
+}
+.row:first-child {
+  padding-top: 0;
+}
+.row:last-child {
+  border-bottom: none;
+}
+
+.title {
+  margin-top: 20px;
+  font-size: 20px;
+  margin-bottom: 25px;
+  font-weight: 600;
+  text-align: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+}
+@media (min-width: 767px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 993px) {
+  .grid {
+    gap: 24px;
+  }
+}
+
+.deliveryGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+}
+@media (min-width: 767px) {
+  .deliveryGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 993px) {
+  .deliveryGrid {
+    gap: 24px;
+  }
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.field.large {
+  grid-column: 1 / -1;
+}
+
+.label {
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+/* Новая звёздочка */
+.asterisk {
+  color: #e74c3c;
+  margin-right: 4px;
+  font-weight: bold;
+}
+
+.input {
+  font-size: 14px;
+  padding: 0 15px;
+  width: 100%;
+  height: 50px;
+  border-radius: 5px;
+  border: 1px solid #e0e0e0;
+  outline: none;
+  transition: 0.3s;
+}
+.input:focus {
+  border-color: #0056d3;
+}
+
+/* Подсветка при пустом required */
+#deliveryForm input:invalid {
+  border-color: #e74c3c;
+}
+#deliveryForm input:valid {
+  border-color: #e0e0e0;
+}
+
+.asterisk {
+  color: #e74c3c;
+  margin-right: 4px;
+  font-weight: bold;
+}

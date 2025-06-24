@@ -1,0 +1,23 @@
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.btn {
+  flex: 1;
+  max-width: 200px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 20px;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  color: #fff;
+  background: #0056d3;
+  border: 1px solid #0056d3;
+  transition: 0.5s;
+}

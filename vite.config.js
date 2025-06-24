@@ -3,6 +3,7 @@ import react from "@vitejs/plugin-react";
 import path from "path";
 
 export default defineConfig({
+  base: "/FoodCase/",
   plugins: [react()],
   resolve: {
     alias: {
@@ -17,14 +18,17 @@ export default defineConfig({
       "@styles": path.resolve(__dirname, "./src/styles"),
     },
   },
-
   server: {
     port: 3000,
-    open: true, // Автооткрытие браузера
+    open: true,
   },
   css: {
     modules: {
-      localsConvention: "camelCase", // camelCase для CSS-модулей
+      localsConvention: "camelCase",
     },
+  },
+  build: {
+    outDir: "docs",
+    emptyOutDir: true,
   },
 });

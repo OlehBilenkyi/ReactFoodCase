@@ -1,4 +1,3 @@
-
 import { PrivacyArticle, PrivacyNav } from "@/components/PrivacyPolicyFeatures";
 import styles from "./PrivacyPolicy.module.css"; // Импорт стилей
 
@@ -11,21 +10,18 @@ const PrivacyPolicy = () => {
 
   return (
     <>
-      {/* Для мета-тегов в обычном React (без Next.js) */}
+      {/* Мета-теги */}
       <title>{metaData.title}</title>
       <meta name="description" content={metaData.description} />
       <meta name="keywords" content={metaData.keywords} />
 
-
       <main className={styles["page-main"]}>
         <div className={styles.container}>
           <h1 className={styles["page-title"]}>Polityka prywatności</h1>
-
           <div className={`${styles["page-grid"]} ${styles.revert}`}>
             <div className={styles["page-grid__main"]}>
               <PrivacyArticle />
             </div>
-
             <div
               className={`${styles["page-grid__aside"]} ${styles["hidden-mob"]}`}
             >
@@ -34,8 +30,6 @@ const PrivacyPolicy = () => {
           </div>
         </div>
       </main>
-
-    
     </>
   );
 };

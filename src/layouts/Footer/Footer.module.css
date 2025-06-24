@@ -1,18 +1,49 @@
 .footer {
-  padding: 40px 0;
-  color: #fff;
-  font-size: 14px;
   background: #000;
+  color: #fff;
+  padding: 40px 20px;
+  font-size: 14px;
 }
-
-.footer__container {
+.footer .container {
   display: flex;
-  flex-direction: column;
-  gap: 30px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.footer__left {
+  flex: 1;
+  min-width: 250px;
+}
+.footer__logo {
+  max-width: 140px;
+  margin-bottom: 16px;
 }
 
-.footer__data,
-.footer__left {
+.footer__slogan {
+  margin-bottom: 16px;
+  line-height: 1.4;
+  color: #ccc;
+}
+.footer__email a {
+  color: #fff;
+  text-decoration: underline;
+}
+.footer__right {
+  flex: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: space-evenly;
+}
+.footer__copyright {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 12px;
+  color: #666;
+}
+.footer__logFlex {
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -20,90 +51,22 @@
   text-align: center;
 }
 
-.footer__data a,
-.footer__left a {
-  text-decoration: underline;
-}
-
-.footer__right {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-}
-
-.footer__title {
-  margin-bottom: 20px;
-  text-align: center;
-  font-weight: 700;
-  font-size: 16px;
-}
-
-
-
-
-
-.footer__partners,
-.footer__socials {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 15px;
-}
-
-.footer__copyright {
-  margin-top: 30px;
-  text-align: center;
-  font-size: 12px;
-}
-
-@media (min-width: 767px) {
-  .footer {
-    font-size: inherit;
-  }
-
-  .footer__container {
-    flex-direction: row;
-    justify-content: space-between;
-  }
-
-  .footer__data,
-  .footer__left {
-    text-align: left;
-    align-items: flex-start;
-    gap: 30px;
-  }
-
-  .footer__data {
+@media (min-width: 993px) {
+  .footer__logFlex {
     flex-direction: row;
     gap: 30px;
     text-align: left;
     align-items: center;
   }
-
-  .footer__slogan {
-    max-width: 420px;
-  }
-
-  .footer__right {
-    flex-direction: row;
-    justify-content: space-between;
-    flex: 1 1 auto;
-  }
-
-  .footer__title {
-    text-align: left;
-  }
-
-  
-
-  .footer__copyright {
-    font-size: 18px;
-    margin-top: 60px;
-  }
 }
 
-@media (min-width: 993px) {
-  .footer__title {
-    font-size: 24px;
+/* адаптив */
+@media (max-width: 768px) {
+  .footer .container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .footer__right {
+    justify-content: center;
   }
 }

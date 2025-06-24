@@ -7,7 +7,7 @@
   background-color: #fff;
 }
 
-.btn-centre {
+.btnCentre {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -22,7 +22,7 @@
   transition: 0.5s;
 }
 
-.btn-centre:hover {
+.btnCentre:hover {
   cursor: pointer;
   transition: 0.5s;
   color: #000;

@@ -1,19 +1,19 @@
+import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { FOOTER_LINKS } from "../../../constants/footerData";
+import { FOOTER_LINKS } from "../../../constants/footerData.jsx";
 import styles from "./FooterNavigation.module.css";
 
 const FooterNavigation = () => {
-  const location = useLocation();
-  const isHomePage =
-    location.pathname === "/" || location.pathname.endsWith("/index.php");
+  const { pathname } = useLocation();
+  const isHome = pathname === "/" || pathname.endsWith("/index.php");
 
   return (
     <div className={styles.column}>
-      <h3 className={styles.title}>Nawigacja:</h3>
+      <div className={styles.title}>Nawigacja:</div>
       <ul className={styles.navList}>
         {FOOTER_LINKS.map((link) => (
           <li key={link.path} className={styles.navItem}>
-            {link.isAnchor && isHomePage ? (
+            {link.isAnchor && isHome ? (
               <a href={link.path} className={styles.navLink}>
                 {link.label}
               </a>

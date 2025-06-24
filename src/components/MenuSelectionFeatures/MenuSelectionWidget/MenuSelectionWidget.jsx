@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
-import styles from './MenuSelectionWidget.module.css';
-import MealCategorySection from '../MealCategorySection/MealCategorySection';
-import DatePickerModal from '../DatePickerModal/DatePickerModal';
+// src/components/MenuSelectionFeatures/MenuSelectionWidget/MenuSelectionWidget.jsx
+import React, { useState } from "react";
+import DatePickerModal from "../DatePickerModal/DatePickerModal";
+import MealCategorySection from "../MealCategorySection/MealCategorySection";
+import styles from "./MenuSelectionWidget.module.css";
 
 const MenuSelectionWidget = ({ onSelectionChange }) => {
-  const [selectedDate, setSelectedDate] = useState('');
+  const [selectedDate, setSelectedDate] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedMeals, setSelectedMeals] = useState({
     sniad: [],
     obiad: [],
-    kolacja: []
+    kolacja: [],
   });
 
   const handleDateSelect = (date) => {
@@ -20,7 +21,7 @@ const MenuSelectionWidget = ({ onSelectionChange }) => {
   const handleMealSelect = (category, meal) => {
     const updatedMeals = {
       ...selectedMeals,
-      [category]: [...selectedMeals[category], meal]
+      [category]: [...selectedMeals[category], meal],
     };
     setSelectedMeals(updatedMeals);
     onSelectionChange(updatedMeals);
@@ -28,38 +29,37 @@ const MenuSelectionWidget = ({ onSelectionChange }) => {
 
   return (
     <div className={styles.widget}>
+      {/* Блок для кнопки «Wybierz datę dostawy» */}
       <div className={styles.dateSelection}>
-        <button 
+        <button
           className={styles.dateButton}
           onClick={() => setIsModalOpen(true)}
         >
-          {selectedDate || 'Wybierz datę dostawy'}
+          {selectedDate || "Wybierz datę dostawy"}
         </button>
       </div>
-      
+
       {selectedDate && (
         <>
-          <MealCategorySection 
+          <MealCategorySection
             category="sniad"
             title="Śniadania"
-            onSelect={handleMealSelect}
+            onSelect={(meal) => handleMealSelect("sniad", meal)}
           />
-          
-          <MealCategorySection 
+          <MealCategorySection
             category="obiad"
             title="Obiad"
-            onSelect={handleMealSelect}
+            onSelect={(meal) => handleMealSelect("obiad", meal)}
           />
-          
-          <MealCategorySection 
+          <MealCategorySection
             category="kolacja"
             title="Kolacja"
-            onSelect={handleMealSelect}
+            onSelect={(meal) => handleMealSelect("kolacja", meal)}
           />
         </>
       )}
-      
-      <DatePickerModal 
+
+      <DatePickerModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onDateSelect={handleDateSelect}

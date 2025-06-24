@@ -1,14 +1,20 @@
-import React, { useState, useCallback } from "react";
+// src/components/OrderFeatures/PackageSelection/PackageSelection.jsx
+import React, { useState, useCallback, useEffect } from "react";
 import PropTypes from "prop-types";
 import PackageWidget from "../PackageWidget/PackageWidget";
 import styles from "./PackageSelection.module.css";
+import Package1200 from "../../../assets/img/pay/1.png";
+import Package1500 from "../../../assets/img/pay/2.png";
+import Package1800 from "../../../assets/img/pay/3.png";
+import Package2000 from "../../../assets/img/pay/4.png";
+import Package2500 from "../../../assets/img/pay/5.png";
 
 const DEFAULT_PACKAGES = [
   {
     id: 1,
     name: "1200",
     price: 50.0,
-    image: "/img/packages/1.png",
+    image: Package1200,
     discount1: 4,
     discount2: 5,
     discount3: 7,
@@ -17,7 +23,7 @@ const DEFAULT_PACKAGES = [
     id: 2,
     name: "1500",
     price: 60.0,
-    image: "/img/packages/2.png",
+    image: Package1500,
     discount1: 4,
     discount2: 5,
     discount3: 7,
@@ -26,7 +32,7 @@ const DEFAULT_PACKAGES = [
     id: 3,
     name: "1800",
     price: 70.0,
-    image: "/img/packages/3.png",
+    image: Package1800,
     discount1: 4,
     discount2: 5,
     discount3: 7,
@@ -35,7 +41,7 @@ const DEFAULT_PACKAGES = [
     id: 4,
     name: "2100",
     price: 80.0,
-    image: "/img/packages/4.png",
+    image: Package2000,
     discount1: 4,
     discount2: 5,
     discount3: 7,
@@ -44,7 +50,7 @@ const DEFAULT_PACKAGES = [
     id: 5,
     name: "2400",
     price: 90.0,
-    image: "/img/packages/5.png",
+    image: Package2500,
     discount1: 4,
     discount2: 5,
     discount3: 7,
@@ -52,58 +58,55 @@ const DEFAULT_PACKAGES = [
 ];
 
 const PackageSelection = ({ onOrderUpdate, className }) => {
-  const [widgets, setWidgets] = useState([{ id: 1 }]);
+  const [widgets, setWidgets] = useState([{ id: Date.now() }]);
   const [selections, setSelections] = useState({});
 
-  const handleSelectionChange = useCallback(
-    (widgetId, selection) => {
-      setSelections((prev) => {
-        const newSelections = {
-          ...prev,
-          [widgetId]: selection,
-        };
+  // При изменении widgets или selections отдаем ровно widgets.length пакетов
+  useEffect(() => {
+    if (!onOrderUpdate) return;
+    const arrayOfPackages = widgets.map(({ id }) =>
+      selections[id] ? selections[id] : { dates: [] }
+    );
+    onOrderUpdate(arrayOfPackages);
+  }, [widgets, selections, onOrderUpdate]);
 
-        // Вызываем обновление заказа
-        if (onOrderUpdate) {
-          onOrderUpdate(Object.values(newSelections));
-        }
-
-        return newSelections;
-      });
-    },
-    [onOrderUpdate]
-  );
-
-  const addPackageWidget = useCallback(() => {
-    const newId = Date.now();
-    setWidgets((prev) => [...prev, { id: newId }]);
+  // Обработка выбора в конкретном виджете
+  const handleSelectionChange = useCallback((widgetId, selection) => {
+    setSelections((prev) => ({
+      ...prev,
+      [widgetId]: selection,
+    }));
   }, []);
 
+  // Добавление нового виджета
+  const addPackageWidget = useCallback(() => {
+    setWidgets((prev) => [...prev, { id: Date.now() }]);
+  }, []);
+
+  // Удаление виджета
   const removePackageWidget = useCallback(
     (id) => {
-      if (widgets.length > 1) {
-        setWidgets((prev) => prev.filter((widget) => widget.id !== id));
-        setSelections((prev) => {
-          const newSelections = { ...prev };
-          delete newSelections[id];
-          return newSelections;
-        });
-      }
+      if (widgets.length <= 1) return;
+      setWidgets((prev) => prev.filter((w) => w.id !== id));
+      setSelections((prev) => {
+        const copy = { ...prev };
+        delete copy[id];
+        return copy;
+      });
     },
-    [widgets.length]
+    [widgets]
   );
 
   return (
     <div className={`${styles.container} ${className || ""}`}>
-      {widgets.map((widget, index) => (
+      {widgets.map((widget, idx) => (
         <PackageWidget
           key={widget.id}
+          widgetId={widget.id} // прокидываем widgetId
           packages={DEFAULT_PACKAGES}
-          isFirst={index === 0}
+          isFirst={idx === 0}
           onRemove={() => removePackageWidget(widget.id)}
-          onSelectionChange={(selection) =>
-            handleSelectionChange(widget.id, selection)
-          }
+          onSelectionChange={(sel) => handleSelectionChange(widget.id, sel)}
         />
       ))}
 
@@ -119,7 +122,7 @@ const PackageSelection = ({ onOrderUpdate, className }) => {
 };
 
 PackageSelection.propTypes = {
-  onOrderUpdate: PropTypes.func,
+  onOrderUpdate: PropTypes.func.isRequired,
   className: PropTypes.string,
 };
 

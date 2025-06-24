@@ -1,65 +1,36 @@
-import React, { useState } from 'react';
-import styles from './MealCategorySection.module.css';
-import MealItem from '../MealItem/MealItem';
-import WeightSelector from '../WeightSelector/WeightSelector';
+import React from "react";
+import { useMealData } from "../../../hooks/MenuSelectionFeatures/useMealData";
+import { useMealSelection } from "../../../hooks/MenuSelectionFeatures/useMealSelection";
+import WeightSelectorWrapper from "./WeightSelectorWrapper";
+import MealGrid from "./MealGrid";
+import styles from "./MealCategorySection.module.css";
 
-const MealCategorySection = ({ category, title, onSelect }) => {
-  const [selectedWeight, setSelectedWeight] = useState(null);
-  const [selectedMeal, setSelectedMeal] = useState(null);
-  
-  // Mock data - replace with actual data from props or API
-  const mealOptions = [
-    { id: 1, name: 'Jajecznica', description: 'Jajka na bekonie', price: 15 },
-    { id: 2, name: 'Owsianka', description: 'Płatki owsiane z owocami', price: 12 }
-  ];
-  
-  const weightOptions = [
-    { weight: '200g', price: 15 },
-    { weight: '300g', price: 20 }
-  ];
-
-  const handleWeightSelect = (weight) => {
-    setSelectedWeight(weight);
-    if (selectedMeal) {
-      onSelect(category, {
-        ...selectedMeal,
-        weight: weight.weight,
-        price: weight.price
-      });
-    }
-  };
-
-  const handleMealSelect = (meal) => {
-    setSelectedMeal(meal);
-    if (selectedWeight) {
-      onSelect(category, {
-        ...meal,
-        weight: selectedWeight.weight,
-        price: selectedWeight.price
-      });
-    }
-  };
+const MealCategorySection = ({
+  category,
+  title,
+  onSelect,
+  initialSelection,
+}) => {
+  const { weightOptions, allMeals } = useMealData(category);
+  const { selectedWeight, selectedMeal, handleWeightClick, handleMealClick } =
+    useMealSelection(allMeals, weightOptions, initialSelection, onSelect);
 
   return (
     <section className={styles.categorySection} data-category={category}>
       <h2 className={styles.sectionTitle}>{title}</h2>
-      
-      <WeightSelector 
+
+      <WeightSelectorWrapper
         options={weightOptions}
-        onSelect={handleWeightSelect}
-        selected={selectedWeight}
+        selectedWeight={selectedWeight}
+        onWeightClick={handleWeightClick}
       />
-      
-      <div className={styles.mealGrid}>
-        {mealOptions.map(meal => (
-          <MealItem
-            key={meal.id}
-            meal={meal}
-            isSelected={selectedMeal?.id === meal.id}
-            onSelect={() => handleMealSelect(meal)}
-          />
-        ))}
-      </div>
+
+      <MealGrid
+        allMeals={allMeals}
+        selectedWeight={selectedWeight}
+        selectedMeal={selectedMeal}
+        onMealClick={handleMealClick}
+      />
     </section>
   );
 };

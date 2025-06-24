@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { ModalProvider } from "./components/OrderFeatures/ModalManager/ModalManager";
+import ModalProvider from "./components/OrderFeatures/ModalManager/ModalManager";
 import { Header, Footer } from "@layouts";
 import { appRoutes } from "./routes";
 

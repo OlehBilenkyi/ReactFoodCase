@@ -5,7 +5,7 @@
   right: 0;
   padding: 10px 0;
   background: #fff;
-  box-shadow: 0 1px 30px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
   z-index: 99;
 }
 
@@ -14,12 +14,12 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 15px;
-  width: 100%;
   max-width: 1470px;
   margin: 0 auto;
+  width: 100%;
 }
 
-/* Общие стили для меню */
+/* сброс списков (если нужно) */
 .mobileMenu,
 .desktopMenu {
   margin: 0;
@@ -27,48 +27,26 @@
   list-style: none;
 }
 
-/* Мобильное меню */
-.mobileMenu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  background: #fff;
-  z-index: 999;
-  padding: 15px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.5s ease;
-  border-top: 1px solid #e3e3e3;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-}
-
-.mobileMenu.open {
-  opacity: 1;
-  visibility: visible;
-}
-
-/* Десктопное меню */
+/* 1) Mobile-first: скрываем десктоп-меню, показываем бургер */
 .desktopMenu {
   display: none;
 }
 
-@media (min-width: 767px) {
+.burgerWrapper {
+  display: block;
+}
+
+/* 2) На экранах ≥768px: наоборот */
+@media (min-width: 768px) {
   .desktopMenu {
     display: flex;
     gap: 15px;
   }
 
-  .mobileMenu {
+  .burgerWrapper {
     display: none;
   }
-}
 
-@media (min-width: 1201px) {
-  .desktopMenu {
-    gap: 30px;
-  }
+  /* Если хотите дополнительно прятать мобильное меню-контейнер: */
+  /* .mobileMenuWrapper { display: none; } */
 }

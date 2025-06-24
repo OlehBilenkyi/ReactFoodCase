@@ -1,0 +1,27 @@
+.payTotalPrev {
+  width: 150px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border: 1px solid #2e67ff;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.2s ease;
+}
+
+.payTotalPrev:hover {
+  background-color: rgba(46, 103, 255, 0.1);
+}
+
+.payTotalPrev:disabled,
+.payTotalPrev.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}

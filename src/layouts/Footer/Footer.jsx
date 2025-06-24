@@ -1,11 +1,13 @@
-import styles from "./Footer.module.css";
+import React from "react";
+import { Link } from "react-router-dom";
 import FooterNavigation from "./FooterNavigation/FooterNavigation";
 import FooterPayments from "./FooterPayments/FooterPayments";
 import FooterContact from "./FooterContact/FooterContact";
+import styles from "./Footer.module.css";
+import LogoFooter from "../../assets/img/footer/logo-w.png";
 
 const Footer = () => {
-  const currentYear = new Date().getFullYear();
-
+  const year = new Date().getFullYear();
   return (
     <footer
       className={styles.footer}
@@ -13,33 +15,30 @@ const Footer = () => {
       itemType="http://schema.org/Organization"
     >
       <div className={styles.container}>
-        <div className={styles.leftSection}>
-          <div className={styles.logoWrapper}>
+        <div className={styles.footer__left}>
+          <div className={styles.footer__logFlex}>
             <img
-              src="/assets/img/logo-w.png"
+              src={LogoFooter}
               alt="FoodCase Logo"
-              className={styles.logo}
+              className={styles.footer__logo}
             />
-            <p className={styles.slogan}>
+            <div className={styles.footer__slogan}>
               Nasza firma zapewnia wygodną dostawę gotowych dań do Twojego domu
-            </p>
+            </div>
           </div>
-          <div className={styles.contact}>
-            Email:{" "}
-            <a href="mailto:biuro@foodcasepl.com">biuro@foodcasepl.com</a>
+          <div className={styles.footer__email}>
+            Email: <a href="#">for@example.com</a>
           </div>
         </div>
-
-        <div className={styles.rightSection}>
+        <div className={styles.footer__right}>
           <FooterNavigation />
           <FooterPayments />
           <FooterContact />
         </div>
       </div>
-
-      <div className={styles.copyright}>
-        &copy; {currentYear} <span itemProp="name">FoodCase</span>. Wszelkie
-        prawa zastrzeżone.
+      <div className={styles.footer__copyright}>
+        &copy; {year} <span itemProp="name">FoodCase</span>. Wszelkie prawa
+        zastrzeżone.
       </div>
     </footer>
   );

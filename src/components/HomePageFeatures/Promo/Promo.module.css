@@ -1,6 +1,10 @@
 .promo {
-  padding-top: 25px;
-  padding-bottom: 30px;
+  padding: 0 15px;
+  width: 100%;
+  max-width: 1470px;
+  margin: 0 auto;
+  background: #f6f7fa;
+  margin-bottom: 30px;
 }
 
 .promo__container {
@@ -17,7 +21,10 @@
   gap: 20px;
 }
 
-.promo img {
+.promoImg {
+  max-width: 100%;
+}
+.promoIcon {
   max-width: 100%;
 }
 
@@ -76,12 +83,12 @@
   }
 
   .promo__inner {
-    max-width: 50%;
+    max-width: 520px;
     width: 100%;
     flex-shrink: 0;
   }
 
-  .promo img {
+  .promoImg {
     max-width: 45%;
   }
 }

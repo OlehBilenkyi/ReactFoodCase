@@ -1,39 +1,43 @@
 .burgerButton {
-  background: none;
+  /* Убираем дефолтные стили */
+  background: transparent;
   border: none;
+
   cursor: pointer;
-  padding: 10px;
+
+  /* Вертикально выстраиваем три линии */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 35px;
   height: 20px;
-  width: 24px;
   position: relative;
   z-index: 1000;
 }
 
-.burgerLine {
+.line {
   display: block;
-  height: 2px;
   width: 100%;
-  background: #000;
-  transition: all 0.3s ease;
+  height: 2px;
+  background-color: #000; /* чёрный цвет линий */
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-/* Анимация при открытии */
-.burgerButton.open .burgerLine:nth-child(1) {
-  transform: translateY(6px) rotate(45deg);
+/* Крестик при isOpen */
+.burgerButton.open .line:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
 }
 
-.burgerButton.open .burgerLine:nth-child(2) {
+.burgerButton.open .line:nth-child(2) {
   opacity: 0;
 }
 
-.burgerButton.open .burgerLine:nth-child(3) {
-  transform: translateY(-6px) rotate(-45deg);
+.burgerButton.open .line:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
 }
 
-@media (min-width: 767px) {
+/* Скрыть на десктопе (≥768px) */
+@media (min-width: 768px) {
   .burgerButton {
     display: none;
   }

@@ -1,0 +1,33 @@
+/* src/components/MenuSelectionFeatures/MenuSelectionWidget/MenuSelectionWidget.module.css */
+
+/* Корневой контейнер виджета */
+.widget {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
+/* Блок для кнопки «Wybierz datę dostawy» */
+.dateSelection {
+  text-align: center;
+}
+
+/* Кнопка выбора даты (для открытия DatePickerModal) */
+.dateButton {
+  padding: 15px 20px;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  color: #fff;
+  background: #0056d3;
+  border: 1px solid #0056d3;
+  transition: 0.5s;
+  cursor: pointer;
+  outline: none;
+}
+.dateButton:hover {
+  background: rgba(0, 0, 0, 0);
+  color: #000;
+}

@@ -1,0 +1,145 @@
+/* OrderTotal.module.css */
+
+/* ----------------------------
+   Обёртка всего блока
+   ---------------------------- */
+.orderTotal {
+  padding: 25px;
+}
+
+@media (min-width: 993px) {
+  .orderTotal {
+    padding: 30px;
+  }
+}
+
+/* ----------------------------
+   Отдельная строка (item) в блоке
+   ---------------------------- */
+.totalItem {
+  display: flex;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.totalItem:first-child {
+  padding-top: 0;
+}
+
+@media (min-width: 993px) {
+  .totalItem {
+    padding: 25px 0;
+  }
+}
+
+/* Заглавие (тег <b>) внутри .totalItem */
+.totalItem b {
+  width: 60%;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+@media (min-width: 993px) {
+  .totalItem b {
+    font-size: 20px;
+  }
+}
+
+/* Значение (тег <span>) внутри .totalItem */
+.totalItem span {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+@media (min-width: 993px) {
+  .totalItem span {
+    font-size: 18px;
+  }
+}
+
+/* ----------------------------
+   Специальный стиль для суммы (окрашивание и жирный)
+   ---------------------------- */
+.totalPrice {
+  color: #006a23;
+  font-weight: 700;
+}
+
+/* ----------------------------
+   Чекбокс с “Regulamin”
+   ---------------------------- */
+.termsCheckbox {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  font-size: 14px;
+  line-height: 16px;
+  margin-top: 20px;
+}
+
+.termsCheckbox input {
+  flex-shrink: 0;
+  width: 25px;
+  height: 25px;
+}
+
+.termsCheckbox a {
+  text-decoration: underline;
+  color: #0056d3;
+}
+
+/* ----------------------------
+   Базовые стили для кнопок
+   ---------------------------- */
+.nextButton,
+.backButton,
+.payButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 20px;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  color: #fff;
+  background: #0056d3;
+  border: 1px solid #0056d3;
+  transition: 0.5s;
+  cursor: pointer;
+  margin-top: 20px;
+  width: 100%;
+  max-width: 310px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.nextButton:hover,
+.backButton:hover,
+.payButton:hover {
+  color: #000;
+  background: rgba(0, 0, 0, 0);
+}
+
+@media (min-width: 993px) {
+  .nextButton,
+  .backButton,
+  .payButton {
+    margin-top: 30px;
+    max-width: 100%;
+  }
+}
+
+/* ----------------------------
+   Состояние “disabled” для кнопок
+   ---------------------------- */
+.disabled {
+  pointer-events: none;
+  color: #000 !important;
+  border-color: #e0e0e0 !important;
+  background: #e0e0e0 !important;
+}
+
+/* Если нужно, можно было бы отдельно стилизовать .backButton или .payButton,
+   но пока они унаследуют от базовых .nextButton-шаблонов. */

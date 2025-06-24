@@ -1,19 +1,23 @@
 {
-  "name": "projectvladelenyoutube",
+  "name": "foodcase",
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://serhiy7.github.io/FoodCase/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d docs",
+    "preview": "vite preview",
+    "lint": "eslint ."
   },
   "dependencies": {
     "@stripe/react-stripe-js": "^3.7.0",
     "@stripe/stripe-js": "^7.3.0",
     "air-datepicker": "^3.5.3",
     "react": "^19.0.0",
+    "react-datepicker": "^8.4.0",
     "react-dom": "^19.0.0",
     "react-helmet": "^6.1.0",
     "react-router-dom": "^7.6.0",
@@ -27,7 +31,7 @@
     "eslint": "^9.22.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
-    "globals": "^16.0.0",
-    "vite": "^6.3.1"
+    "gh-pages": "^6.3.0",
+    "vite": "^5.2.2"
   }
 }
