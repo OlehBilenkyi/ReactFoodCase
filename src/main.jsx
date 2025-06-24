@@ -8,7 +8,7 @@ const root = document.getElementById("root");
 
 createRoot(root).render(
   <React.StrictMode>
-    <BrowserRouter basename="/FoodCase/">
+    <BrowserRouter basename="/ReactFoodCase/">
       <App />
     </BrowserRouter>
   </React.StrictMode>
