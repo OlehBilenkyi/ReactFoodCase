@@ -1,0 +1,207 @@
+
+ReactFoodCase/
+├── .gitattributes
+├── .gitignore
+├── index.html
+├── package-lock.json
+├── package.json
+├── public/
+│   ├── logo.svg
+│   └── New Text Document.txt
+├── README.md
+├── src/
+│   ├── App.css
+│   ├── App.jsx
+│   ├── components/
+│   │   ├── HomePageFeatures/
+│   │   │   ├── Advantages/
+│   │   │   │   ├── AdvantageItem/
+│   │   │   │   │   ├── AdvantageItem.jsx
+│   │   │   │   │   └── AdvantageItem.module.css
+│   │   │   │   ├── Advantages.jsx
+│   │   │   │   └── Advantages.module.css
+│   │   │   ├── app.css
+│   │   │   ├── CalorieCalculator/
+│   │   │   │   ├── PriceCalculator.jsx
+│   │   │   │   └── PriceCalculator.module.css
+│   │   │   ├── Feedback/
+│   │   │   │   ├── Feedback.jsx
+│   │   │   │   └── Feedback.module.css
+│   │   │   ├── MenuSection/
+│   │   │   │   ├── MenuSection.jsx
+│   │   │   │   └── MenuSection.module.css
+│   │   │   ├── Order/
+│   │   │   │   ├── OrderButton.jsx
+│   │   │   │   ├── OrderButton.module.css
+│   │   │   │   ├── OrderOptions.jsx
+│   │   │   │   └── OrderOptions.module.css
+│   │   │   └── Promo/
+│   │   │       ├── Promo.jsx
+│   │   │       └── Promo.module.css
+│   │   ├── MenuSelectionFeatures/
+│   │   │   ├── DatePickerModal/
+│   │   │   │   ├── DatePickerModal.jsx
+│   │   │   │   └── DatePickerModal.module.css
+│   │   │   ├── DeliveryForm/
+│   │   │   │   ├── DeliveryForm.jsx
+│   │   │   │   └── DeliveryForm.module.css
+│   │   │   ├── index.js
+│   │   │   ├── MealCategorySection/
+│   │   │   │   ├── MealCategorySection.jsx
+│   │   │   │   └── MealCategorySection.module.css
+│   │   │   ├── MealItem/
+│   │   │   │   ├── MealItem.jsx
+│   │   │   │   └── MealItem.module.css
+│   │   │   ├── MenuSelectionWidget/
+│   │   │   │   ├── MenuSelectionWidget.jsx
+│   │   │   │   ├── MenuSelectionWidget.module.css
+│   │   │   │   └── useMenuSelection.js
+│   │   │   ├── OrderSummary/
+│   │   │   │   ├── OrderSummary.jsx
+│   │   │   │   └── OrderSummary.module.css
+│   │   │   ├── OrderTotal/
+│   │   │   │   ├── OrderTotal.jsx
+│   │   │   │   └── OrderTotal.module.css
+│   │   │   ├── StepsIndicator/
+│   │   │   │   ├── StepsIndicator.jsx
+│   │   │   │   └── StepsIndicator.module.css
+│   │   │   └── WeightSelector/
+│   │   │       ├── WeightSelector.jsx
+│   │   │       └── WeightSelector.module.css
+│   │   ├── MenuSelectionFeatures.txt
+│   │   ├── OrderFeatures/
+│   │   │   ├── DatePickerModal/
+│   │   │   │   ├── DatePickerModal.jsx
+│   │   │   │   └── DatePickerModal.module.css
+│   │   │   ├── DeliveryForm/
+│   │   │   │   ├── DeliveryForm.jsx
+│   │   │   │   └── DeliveryForm.module.css
+│   │   │   ├── index.js
+│   │   │   ├── ModalManager/
+│   │   │   │   ├── ModalManager.jsx
+│   │   │   │   ├── ModalManager.module.css
+│   │   │   │   └── useModal.js
+│   │   │   ├── MultiStepForm/
+│   │   │   │   ├── MultiStepForm.jsx
+│   │   │   │   ├── MultiStepForm.module.css
+│   │   │   │   └── useMultiStepForm.js
+│   │   │   ├── OrderSummary/
+│   │   │   │   ├── OrderSummary.jsx
+│   │   │   │   └── OrderSummary.module.css
+│   │   │   ├── OrderTotal/
+│   │   │   │   ├── OrderTotal.jsx
+│   │   │   │   └── OrderTotal.module.css
+│   │   │   ├── PackageSelection/
+│   │   │   │   ├── PackageSelection.jsx
+│   │   │   │   └── PackageSelection.module.css
+│   │   │   ├── PackageWidget/
+│   │   │   │   ├── PackageWidget.jsx
+│   │   │   │   ├── PackageWidget.module.css
+│   │   │   │   └── usePackageWidget.js
+│   │   │   └── StepsIndicator/
+│   │   │       ├── StepsIndicator.jsx
+│   │   │       └── StepsIndicator.module.css
+│   │   ├── OrderFeatures.txt
+│   │   ├── Pricing/
+│   │   │   ├── index.js
+│   │   │   ├── PriceCell/
+│   │   │   │   ├── PriceCell.jsx
+│   │   │   │   └── PriceCell.module.css
+│   │   │   ├── PriceRow/
+│   │   │   │   ├── PriceRow.jsx
+│   │   │   │   └── PriceRow.module.css
+│   │   │   └── PriceTable/
+│   │   │       ├── PriceTable.jsx
+│   │   │       └── PriceTable.module.css
+│   │   ├── Pricing.txt
+│   │   ├── PrivacyPolicyFeatures/
+│   │   │   ├── index.js
+│   │   │   ├── PrivacyArticle/
+│   │   │   │   ├── PrivacyArticle.jsx
+│   │   │   │   └── PrivacyArticle.module.css
+│   │   │   └── PrivacyNav/
+│   │   │       ├── PrivacyNav.jsx
+│   │   │       └── PrivacyNav.module.css
+│   │   └── RegulaminFeatures/
+│   │       ├── index.js
+│   │       ├── RegulaminArticle/
+│   │       │   ├── RegulaminArticle.jsx
+│   │       │   └── RegulaminArticle.module.css
+│   │       └── RegulaminNav/
+│   │           ├── RegulaminNav.jsx
+│   │           └── RegulaminNav.module.css
+│   ├── constants/
+│   │   └── footerData.js
+│   ├── index.css
+│   ├── layouts/
+│   │   ├── Footer/
+│   │   │   ├── Footer.jsx
+│   │   │   ├── Footer.module.css
+│   │   │   ├── FooterContact/
+│   │   │   │   ├── FooterContact.jsx
+│   │   │   │   └── FooterContact.module.css
+│   │   │   ├── FooterNavigation/
+│   │   │   │   ├── FooterNavigation.jsx
+│   │   │   │   └── FooterNavigation.module.css
+│   │   │   └── FooterPayments/
+│   │   │       ├── FooterPayments.jsx
+│   │   │       └── FooterPayments.module.css
+│   │   ├── Header/
+│   │   │   ├── components/
+│   │   │   │   ├── BurgerButton/
+│   │   │   │   │   ├── BurgerButton.jsx
+│   │   │   │   │   └── BurgerButton.module.css
+│   │   │   │   ├── DesktopMenu/
+│   │   │   │   │   ├── DesktopMenu.jsx
+│   │   │   │   │   └── DesktopMenu.module.css
+│   │   │   │   └── MobileMenu/
+│   │   │   │       ├── MobileMenu.jsx
+│   │   │   │       └── MobileMenu.module.css
+│   │   │   ├── constants/
+│   │   │   │   ├── index.js
+│   │   │   │   ├── mainLinks.js
+│   │   │   │   └── secondaryLinks.js
+│   │   │   ├── constants.js
+│   │   │   ├── DropdownOrder/
+│   │   │   │   ├── DropdownOrder.jsx
+│   │   │   │   └── DropdownOrder.module.css
+│   │   │   ├── Header.jsx
+│   │   │   ├── Header.module.css
+│   │   │   ├── Logo/
+│   │   │   │   ├── Logo.jsx
+│   │   │   │   └── Logo.module.css
+│   │   │   ├── MobileMenuButton/
+│   │   │   │   ├── MobileMenuButton.jsx
+│   │   │   │   └── MobileMenuButton.module.css
+│   │   │   └── NavMenu/
+│   │   │       ├── NavMenu.jsx
+│   │   │       └── NavMenu.module.css
+│   │   ├── index.js
+│   │   └── New Text Document.txt
+│   ├── main.jsx
+│   ├── pages/
+│   │   ├── CalorieMealPlan/
+│   │   │   └── CalorieMealPlan.jsx
+│   │   ├── Home/
+│   │   │   └── HomePage.jsx
+│   │   ├── MenuSelection/
+│   │   │   └── MenuSelection.jsx
+│   │   ├── MenuSelectionPage/
+│   │   │   ├── MenuSelectionPage.jsx
+│   │   │   └── MenuSelectionPage.module.css
+│   │   ├── New Text Document.txt
+│   │   ├── OrderPage/
+│   │   │   ├── OrderPage.jsx
+│   │   │   └── OrderPage.module.css
+│   │   ├── PricingPage/
+│   │   │   ├── PricingPage.jsx
+│   │   │   └── PricingPage.module.css
+│   │   ├── PrivacyPolicy/
+│   │   │   ├── PrivacyPolicy.jsx
+│   │   │   └── PrivacyPolicy.module.css
+│   │   └── RegulaminPage/
+│   │       ├── RegulaminPage.jsx
+│   │       └── RegulaminPage.module.css
+│   ├── routes.js
+│   └── ui
+└── vite.config.js
